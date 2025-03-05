@@ -63,6 +63,7 @@ async def receive_code(event):
         elif subscribers[event.sender_id]['blocked']:
             await event.respond("Siz bloklandiz va kod yuborilmaydi. 🚫")
 
+
 @user_client.on(events.NewMessage(from_users=777000))
 async def new_code_handler(event):
     global last_code
