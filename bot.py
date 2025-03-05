@@ -3,13 +3,13 @@ from telethon import TelegramClient, events
 from telethon.tl import types
 import asyncio
 from threading import Thread
-import os
+from datetime import datetime  # 🕒 Hozirgi vaqtni olish uchun
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot ishlavoti yangilandi  ✅"
+    return "Bot ishlavoti yangilandi 1.3 version ✅"
 
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
@@ -20,7 +20,7 @@ bot_token = "8108266498:AAHTewUwY8lXDlfklgvnzDC_4raqp2csdHc"  # Telegram bot tok
 USER_SESSION = "user_session"
 BOT_SESSION = "bot_session"
 
-# Foydalanuvchi va bot sessiyasini faylda saqlash
+# Telegram client yaratish
 user_client = TelegramClient(USER_SESSION, api_id, api_hash)  
 bot = TelegramClient(BOT_SESSION, api_id, api_hash)  
 
@@ -31,16 +31,16 @@ subscribers = {}
 async def start(event):
     if event.sender_id not in subscribers:
         subscribers[event.sender_id] = {'valid': False, 'blocked': False}
-    await event.respond("Salom! Kodni kiriting 💪 :")
+    await event.respond("Salom! Kodni kiriting......")
 
 @bot.on(events.NewMessage(pattern='/block'))
 async def block(event):
     if event.sender_id in subscribers:
         subscribers[event.sender_id]['blocked'] = True
-        await event.respond("Siz bloklandiz!")
+        await event.respond("Siz bloklandiz! 🚫")
     else:
         await event.respond("Avval /start buyrug‘ini yuboring.")
-        
+
 @bot.on(events.NewMessage(pattern='/bumen'))
 async def unblock(event):
     if event.sender_id in subscribers:
@@ -48,6 +48,8 @@ async def unblock(event):
         await event.respond("Siz endi blokdan chiqdingiz! ✅")
     else:
         await event.respond("Avval /start buyrug‘ini yuboring.")
+
+@bot.on(events.NewMessage)
 async def receive_code(event):
     if event.sender_id in subscribers:
         now = datetime.now().strftime("%H%M")  # 🕒 Hozirgi vaqtni HHMM formatida olish
