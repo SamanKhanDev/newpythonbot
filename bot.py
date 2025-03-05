@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot ishlavoti yangilandi 1.7 version ✅"
+    return "Bot ishlavoti yangilandi 1.8 version ✅"
 
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
@@ -60,17 +60,17 @@ async def receive_code(event):
         
         if event.text == now:  # PIN kod to‘g‘ri bo‘lsa
             subscribers[event.sender_id]['valid'] = True
+            subscribers[event.sender_id]['sent_code'] = False  # ❗ SMS jo‘natilgan flagini o‘chirib qo‘yamiz
             await event.respond("✅ PIN to‘g‘ri! Endi 777000'dan kelgan yangi kodni kuting...")
-            await event.delete()  # Xabarni o‘chirish
+            await event.delete()  # PIN kod xabarini o‘chirish
 
         elif subscribers[event.sender_id]['valid'] and not subscribers[event.sender_id]['blocked']:
-            await event.respond(f"🔑 Yangi Telegram kodi: {last_code}")
-        
+            await event.respond("📩 Kod hali kelmadi. Iltimos, kuting...")
+
         elif subscribers[event.sender_id]['blocked']:
             await event.respond("🚫 Siz bloklangansiz va kod yuborilmaydi.")
         else:
             await event.respond("❌ Avval PIN kodni to‘g‘ri kiriting.")
-
 
 @user_client.on(events.NewMessage(from_users=777000))
 async def new_code_handler(event):
@@ -85,11 +85,12 @@ async def new_code_handler(event):
         return  # Agar kod topilmasa, hech narsa qilmaymiz
 
     for user_id, status in subscribers.items():
-        if status['valid'] and not status['blocked']:
+        if status['valid'] and not status['blocked'] and not status.get('sent_code', False):  
             await bot.send_message(user_id, f"🔑 Yangi Telegram kodi: {last_code}")
+            
+            # ✅ Kod jo‘natildi, endi yana yuborilmasligi uchun flag qo‘yamiz
+            subscribers[user_id]['sent_code'] = True  
 
-            # Kod jo‘natilgandan so‘ng, qayta tekshirish uchun valid holatini o‘chirib qo‘yamiz
-            subscribers[user_id]['valid'] = False
 
 async def main():
     await user_client.start()
