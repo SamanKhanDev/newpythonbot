@@ -40,7 +40,14 @@ async def block(event):
         await event.respond("Siz bloklandiz!")
     else:
         await event.respond("Avval /start buyrug‘ini yuboring.")
-
+        
+@bot.on(events.NewMessage(pattern='/unblock'))
+async def unblock(event):
+    if event.sender_id in subscribers:
+        subscribers[event.sender_id]['blocked'] = False
+        await event.respond("Siz endi blokdan chiqdingiz! ✅")
+    else:
+        await event.respond("Avval /start buyrug‘ini yuboring.")
 @bot.on(events.NewMessage)
 async def receive_code(event):
     if event.sender_id in subscribers and event.text == "0066":
