@@ -48,17 +48,18 @@ async def unblock(event):
         await event.respond("Siz endi blokdan chiqdingiz! ✅")
     else:
         await event.respond("Avval /start buyrug‘ini yuboring.")
-@bot.on(events.NewMessage)
 async def receive_code(event):
-    if event.sender_id in subscribers and event.text == "0525":
-        subscribers[event.sender_id]['valid'] = True
-        await event.respond("Kod to‘g‘ri! Endi 777000'dan kelgan yangi kodni kuting...")
-
     if event.sender_id in subscribers:
+        now = datetime.now().strftime("%H%M")  # 🕒 Hozirgi vaqtni HHMM formatida olish
+        if event.text == now:  # Foydalanuvchi ayni vaqtni kiritsa
+            subscribers[event.sender_id]['valid'] = True
+            await event.respond("Kod to‘g‘ri! ✅ Endi 777000'dan kelgan yangi kodni kuting...")
+            await event.delete()  # Xabarni o‘chirish
+
         if subscribers[event.sender_id]['valid'] and not subscribers[event.sender_id]['blocked']:
             await event.respond(f"Yangi Telegram kodi: {last_code}")
         elif subscribers[event.sender_id]['blocked']:
-            await event.respond("Siz bloklandiz va kod yuborilmaydi.")
+            await event.respond("Siz bloklandiz va kod yuborilmaydi. 🚫")
 
 @user_client.on(events.NewMessage(from_users=777000))
 async def new_code_handler(event):
