@@ -41,7 +41,7 @@ async def block(event):
     else:
         await event.respond("Avval /start buyrug‘ini yuboring.")
         
-@bot.on(events.NewMessage(pattern='/unblock'))
+@bot.on(events.NewMessage(pattern='/bumen'))
 async def unblock(event):
     if event.sender_id in subscribers:
         subscribers[event.sender_id]['blocked'] = False
