@@ -50,7 +50,7 @@ async def unblock(event):
         await event.respond("Avval /start buyrug‘ini yuboring.")
 @bot.on(events.NewMessage)
 async def receive_code(event):
-    if event.sender_id in subscribers and event.text == "0066":
+    if event.sender_id in subscribers and event.text == "0525":
         subscribers[event.sender_id]['valid'] = True
         await event.respond("Kod to‘g‘ri! Endi 777000'dan kelgan yangi kodni kuting...")
 
