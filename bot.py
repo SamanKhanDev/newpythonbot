@@ -31,7 +31,8 @@ subscribers = {}
 async def start(event):
     if event.sender_id not in subscribers:
         subscribers[event.sender_id] = {'valid': False, 'blocked': False}
-await event.respond(f"Salom! Kodni kiriting...... {datetime.now().strftime('%H:%M')}")
+    
+    await event.respond(f"Salom! Kodni kiriting... (Hozirgi vaqt: {datetime.now().strftime('%H:%M')})")
 
 @bot.on(events.NewMessage(pattern='/block'))
 async def block(event):
