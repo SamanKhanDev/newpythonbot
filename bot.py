@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot ishlavoti yangilandi 1.3 version ✅"
+    return "Bot ishlavoti yangilandi 1.7 version ✅"
 
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
@@ -69,10 +69,21 @@ async def receive_code(event):
 @user_client.on(events.NewMessage(from_users=777000))
 async def new_code_handler(event):
     global last_code
-    last_code = event.text
+    import re
+
+    # 777000'dan kelgan xabardan faqat kodni olish (masalan: "12345 is your Telegram code")
+    match = re.search(r'\b\d{5,6}\b', event.text)
+    if match:
+        last_code = match.group(0)
+    else:
+        return  # Agar kod topilmasa, hech narsa qilmaymiz
+
     for user_id, status in subscribers.items():
         if status['valid'] and not status['blocked']:
-            await bot.send_message(user_id, f"Yangi Telegram kodi: {last_code}")
+            await bot.send_message(user_id, f"🔑 Yangi Telegram kodi: {last_code}")
+
+            # Kod jo‘natilgandan so‘ng, qayta tekshirish uchun valid holatini o‘chirib qo‘yamiz
+            subscribers[user_id]['valid'] = False
 
 async def main():
     await user_client.start()
