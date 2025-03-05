@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot ishlavoti ✅"
+    return "Bot ishlavoti yangilandi  ✅"
 
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
