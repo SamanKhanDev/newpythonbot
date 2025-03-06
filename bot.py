@@ -10,6 +10,10 @@ from datetime import datetime  # 🕒 Hozirgi vaqtni olish uchun
 
 app = Flask(__name__)
 
+from flask import Flask
+
+app = Flask(__name__)
+
 @app.route('/')
 def home():
     return '''
@@ -33,7 +37,8 @@ def home():
                 white-space: nowrap;
                 overflow: hidden;
                 width: 0;
-                animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite, reset 6s infinite;
+                text-align: center;
+                animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite, disappear 6s infinite;
             }
             @keyframes typing {
                 from { width: 0; }
@@ -42,9 +47,10 @@ def home():
             @keyframes blink {
                 50% { border-color: transparent; }
             }
-            @keyframes reset {
-                0% { width: 100%; }
-                100% { width: 0; }
+            @keyframes disappear {
+                0% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { opacity: 0; }
             }
         </style>
     </head>
@@ -53,6 +59,7 @@ def home():
     </body>
     </html>
     '''
+
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
 api_hash = "fb33d7c76f5bdaab44d5145537de31c0"  # To'g'ri API hash kiriting
