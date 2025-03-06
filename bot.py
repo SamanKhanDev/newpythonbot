@@ -5,12 +5,46 @@ import asyncio
 from threading import Thread
 from datetime import datetime  # 🕒 Hozirgi vaqtni olish uchun
 
+
+
+
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot ishlavoti yangilandi 1.8 version ✅"
-
+    return '''
+    <html>
+    <head>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #1a202c;
+                color: white;
+                font-family: Arial, sans-serif;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .animated {
+                opacity: 0;
+                transform: translateY(-20px);
+                animation: fadeIn 1s forwards;
+            }
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="animated">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
+    </body>
+    </html>
+    '''
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
 api_hash = "fb33d7c76f5bdaab44d5145537de31c0"  # To'g'ri API hash kiriting
