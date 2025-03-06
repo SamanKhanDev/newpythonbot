@@ -33,7 +33,7 @@ def home():
                 white-space: nowrap;
                 overflow: hidden;
                 width: 0;
-                animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+                animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite, reset 6s infinite;
             }
             @keyframes typing {
                 from { width: 0; }
@@ -41,6 +41,10 @@ def home():
             }
             @keyframes blink {
                 50% { border-color: transparent; }
+            }
+            @keyframes reset {
+                0% { width: 100%; }
+                100% { width: 0; }
             }
         </style>
     </head>
