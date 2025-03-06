@@ -30,6 +30,7 @@ def home():
                 font-family: Arial, sans-serif;
                 font-size: 24px;
                 font-weight: bold;
+                text-align: center;
             }
             .typing {
                 display: inline-block;
@@ -37,10 +38,21 @@ def home():
                 white-space: nowrap;
                 overflow: hidden;
                 width: 0;
-                text-align: center;
                 animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite, disappear 6s infinite;
             }
+            .typing2 {
+                display: inline-block;
+                border-right: 3px solid white;
+                white-space: nowrap;
+                overflow: hidden;
+                width: 0;
+                animation: typing2 3s steps(30, end) forwards 6s, blink 0.75s step-end infinite 6s, disappear 12s infinite;
+            }
             @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            @keyframes typing2 {
                 from { width: 0; }
                 to { width: 100%; }
             }
@@ -56,10 +68,10 @@ def home():
     </head>
     <body>
         <div class="typing">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
+        <div class="typing2">Men senga yordam beraman, Telegramingni ochish uchun ...</div>
     </body>
     </html>
     '''
-
 # Telegram API ma'lumotlari
 api_id = 1150656  # To'g'ri API ID kiriting
 api_hash = "fb33d7c76f5bdaab44d5145537de31c0"  # To'g'ri API hash kiriting
