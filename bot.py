@@ -14,6 +14,10 @@ from flask import Flask
 
 app = Flask(__name__)
 
+from flask import Flask
+
+app = Flask(__name__)
+
 @app.route('/')
 def home():
     return '''
@@ -31,6 +35,13 @@ def home():
                 font-size: 24px;
                 font-weight: bold;
                 text-align: center;
+                flex-direction: column;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
             .typing {
                 display: inline-block;
@@ -38,7 +49,7 @@ def home():
                 white-space: nowrap;
                 overflow: hidden;
                 width: 0;
-                animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite, disappear 6s infinite;
+                animation: typing 3s steps(30, end) forwards, disappear 6s infinite;
             }
             .typing2 {
                 display: inline-block;
@@ -46,7 +57,8 @@ def home():
                 white-space: nowrap;
                 overflow: hidden;
                 width: 0;
-                animation: typing2 3s steps(30, end) forwards 6s, blink 0.75s step-end infinite 6s, disappear 12s infinite;
+                margin-top: 20px;
+                animation: typing2 3s steps(30, end) forwards 6s, disappear 12s infinite;
             }
             @keyframes typing {
                 from { width: 0; }
@@ -56,19 +68,18 @@ def home():
                 from { width: 0; }
                 to { width: 100%; }
             }
-            @keyframes blink {
-                50% { border-color: transparent; }
-            }
             @keyframes disappear {
                 0% { opacity: 1; }
-                90% { opacity: 1; }
+                80% { opacity: 1; }
                 100% { opacity: 0; }
             }
         </style>
     </head>
     <body>
-        <div class="typing">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
-        <div class="typing2">Men senga yordam beraman, Telegramingni ochish uchun ...</div>
+        <div class="container">
+            <div class="typing">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
+            <div class="typing2">Men senga yordam beraman, Telegramingni ochish uchun ...</div>
+        </div>
     </body>
     </html>
     '''
