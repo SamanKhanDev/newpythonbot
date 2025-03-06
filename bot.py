@@ -18,6 +18,10 @@ from flask import Flask
 
 app = Flask(__name__)
 
+from flask import Flask
+
+app = Flask(__name__)
+
 @app.route('/')
 def home():
     return '''
@@ -60,6 +64,15 @@ def home():
                 margin-top: 20px;
                 animation: typing2 3s steps(30, end) forwards 6s, disappear 12s infinite;
             }
+            .lock-message {
+                margin-top: 30px;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                opacity: 0;
+                animation: fadeIn 3s forwards 12s;
+            }
             @keyframes typing {
                 from { width: 0; }
                 to { width: 100%; }
@@ -73,12 +86,20 @@ def home():
                 80% { opacity: 1; }
                 100% { opacity: 0; }
             }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="typing">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
             <div class="typing2">Men senga yordam beraman, Telegramingni ochish uchun ...</div>
+            <div class="lock-message">
+                <span style="font-size: 24px;">🔒</span>
+                <span>Bemalol ishlatishing mumkin!</span>
+            </div>
         </div>
     </body>
     </html>
