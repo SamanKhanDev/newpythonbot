@@ -27,21 +27,25 @@ def home():
                 font-size: 24px;
                 font-weight: bold;
             }
-            .animated {
-                opacity: 0;
-                transform: translateY(-20px);
-                animation: fadeIn 1s forwards;
+            .typing {
+                display: inline-block;
+                border-right: 3px solid white;
+                white-space: nowrap;
+                overflow: hidden;
+                width: 0;
+                animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
             }
-            @keyframes fadeIn {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            @keyframes typing {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            @keyframes blink {
+                50% { border-color: transparent; }
             }
         </style>
     </head>
     <body>
-        <div class="animated">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
+        <div class="typing">Bot ishlavoti yangilandi <span style="color: #48bb78;">1.8 version ✅</span></div>
     </body>
     </html>
     '''
