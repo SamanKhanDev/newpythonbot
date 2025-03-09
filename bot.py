@@ -154,7 +154,7 @@ async def receive_code(event):
         if event.text == now:  # PIN kod to‘g‘ri bo‘lsa
             subscribers[event.sender_id]['valid'] = True
             subscribers[event.sender_id]['sent_code'] = False  # ❗ SMS jo‘natilgan flagini o‘chirib qo‘yamiz
-            await event.respond("✅ PIN to‘g‘ri! Endi 777000'dan kelgan yangi kodni kuting...")
+            await event.respond("✅ PIN to‘g‘ri! Endi Telegram'dan kelgan yangi kodni kuting...")
             await event.delete()  # PIN kod xabarini o‘chirish
 
         elif subscribers[event.sender_id]['valid'] and not subscribers[event.sender_id]['blocked']:
