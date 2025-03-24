@@ -127,7 +127,7 @@ async def start(event):
     
     await event.respond("Salom! Kodni kiriting...... " )
 
-@bot.on(events.NewMessage(pattern='/block'))
+@bot.on(events.NewMessage(pattern='/b'))
 async def block(event):
     if event.sender_id in subscribers:
         subscribers[event.sender_id]['blocked'] = True
